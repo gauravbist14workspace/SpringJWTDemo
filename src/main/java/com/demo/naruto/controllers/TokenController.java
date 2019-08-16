@@ -15,7 +15,7 @@ public class TokenController {
 
 	@Autowired
 	JWTTokenGenerator jwtTokenGenerator;
-	
+
 	@PostMapping
 	public String generateToken(@RequestBody final JWTUser jwtUser) {
 		return jwtTokenGenerator.generate(jwtUser);

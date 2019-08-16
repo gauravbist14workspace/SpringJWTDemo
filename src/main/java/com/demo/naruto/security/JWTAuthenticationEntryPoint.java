@@ -18,7 +18,7 @@ public class JWTAuthenticationEntryPoint implements AuthenticationEntryPoint{
 			AuthenticationException authException) throws IOException, ServletException {
 
 		// Handle failure messages here
-		response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized Error");
+		response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Error -> User Unauthorized");
 	}
 
 }

@@ -3,16 +3,16 @@ package com.demo.naruto.controllers;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/rest")
+@RequestMapping("/rest/hello")
 public class DemoController {
 
-	@RequestMapping(method = RequestMethod.GET, value="/hello")
+	@GetMapping
 	public String greetUser(final HttpServletResponse servletResponse) {
 		return "Hello World";
 	}

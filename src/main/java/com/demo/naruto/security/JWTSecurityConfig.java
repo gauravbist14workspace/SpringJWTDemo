@@ -2,6 +2,7 @@ package com.demo.naruto.security;
 
 import java.util.Collections;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,7 +19,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 public class JWTSecurityConfig extends WebSecurityConfigurerAdapter {
 
+	@Autowired
 	private JWTAuthenticationProvider jwtAuthenticationProvider;
+	
+	@Autowired
 	private JWTAuthenticationEntryPoint entryPoint;
 	
 	// Spring uses by default LDAP filters
@@ -43,7 +47,9 @@ public class JWTSecurityConfig extends WebSecurityConfigurerAdapter {
 		super.configure(http);
 		
 		http.csrf().disable()
-			.authorizeRequests().antMatchers("**/rest/**").authenticated()
+			.authorizeRequests()
+			.antMatchers("/token").permitAll()
+			.anyRequest().authenticated()
 			.and()
 			.exceptionHandling().authenticationEntryPoint(entryPoint)
 			.and()
