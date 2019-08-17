@@ -1,4 +1,4 @@
-package com.demo.naruto.security;
+package com.demo.naruto.jwt;
 
 import java.util.List;
 
@@ -8,6 +8,7 @@ import org.springframework.security.authentication.dao.AbstractUserDetailsAuthen
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -36,6 +37,7 @@ public class JWTAuthenticationProvider extends AbstractUserDetailsAuthentication
 		JWTUser jwtUser = jwtValidator.validate(token);
 		
 		if(jwtUser == null) {
+			SecurityContextHolder.clearContext();
 			throw new RuntimeException("JWT Token is inccorrect!!");
 		}
 		

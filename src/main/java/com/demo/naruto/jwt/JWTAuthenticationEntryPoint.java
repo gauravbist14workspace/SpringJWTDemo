@@ -1,4 +1,4 @@
-package com.demo.naruto.security;
+package com.demo.naruto.jwt;
 
 import java.io.IOException;
 

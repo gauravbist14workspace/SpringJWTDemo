@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.demo.naruto.jwt.JWTTokenGenerator;
 import com.demo.naruto.models.JWTUser;
-import com.demo.naruto.security.JWTTokenGenerator;
 
 @RestController
 @RequestMapping("/token")

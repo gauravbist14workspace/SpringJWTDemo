@@ -1,4 +1,4 @@
-package com.demo.naruto.security;
+package com.demo.naruto.jwt;
 
 import java.io.IOException;
 
@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 
 import com.demo.naruto.models.JWTAuthenticationToken;
@@ -25,13 +26,16 @@ public class JwtAuthenticationTokenFilter extends AbstractAuthenticationProcessi
 		String header = request.getHeader("Authorization");
 		
 		if(header == null || !header.startsWith("Basic")) {
+			SecurityContextHolder.clearContext();
 			throw new RuntimeException("JWT token is missing");
 		}
 		
 		String authenticationToken = header.split(" ")[1];
 		JWTAuthenticationToken token = new JWTAuthenticationToken(authenticationToken);
 		
-		return getAuthenticationManager().authenticate(token);
+		Authentication auth = getAuthenticationManager().authenticate(token);
+//		SecurityContextHolder.getContext().setAuthentication(auth);
+		return auth;
 	}
 	
 	@Override
