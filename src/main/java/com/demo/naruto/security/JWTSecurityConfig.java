@@ -7,11 +7,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -41,6 +44,11 @@ public class JWTSecurityConfig extends WebSecurityConfigurerAdapter {
 		return new ProviderManager(Collections.singletonList(jwtAuthenticationProvider));
 	}
 	
+	@Bean
+	public PasswordEncoder getPasswordEncode() {
+		return new BCryptPasswordEncoder(12);
+	}
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
@@ -48,15 +56,13 @@ public class JWTSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http.csrf().disable()
 			.authorizeRequests()
-			.antMatchers("/token").permitAll()
-			.anyRequest().authenticated()
+			.antMatchers("**/rest/**").authenticated()
 			.and()
 			.exceptionHandling().authenticationEntryPoint(entryPoint)
 			.and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		
 		http.addFilterBefore(authenticationFilter(), UsernamePasswordAuthenticationFilter.class);
-		
 		http.headers().cacheControl();
 	}
 	
