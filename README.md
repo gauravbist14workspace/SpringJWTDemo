@@ -83,4 +83,4 @@ A simple Spring boot demo for JWT integration
 > curl -X POST --insecure https://localhost:8443/token -H "Content-Type: application/json" -d '{"id":1,"userName":"john doe", "userRole": "admin"}'
 
 3) Copy the token received & using it to make another request:
-> curl -X GET --insecure https://localhost:8443/rest/hello -H "Authorization: Basic <TOKEN>"
+> curl -X GET --insecure https://localhost:8443/rest/hello -H "Authorization: Basic TOKEN"
