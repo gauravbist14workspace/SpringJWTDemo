@@ -6,7 +6,7 @@ A simple Spring boot demo for JWT integration
 1) Create a self-signed certificate for demo purpose (Don't use this for production).
 2) Using java keytool, create a keystore which stores private keys and certificates.
 
-# To run the keytool utility, your shell environment must be configured so that the J2SE /bin directory is in the path, otherwise the full path to the utility must be present on the command line #
+## To run the keytool utility, your shell environment must be configured so that the J2SE /bin directory is in the path, otherwise the full path to the utility must be present on the command line ##
 > keytool -genkey -alias jwtdemokey -keyalg RSA -keysize 2048 -storetype PKCS12 -keystore jwtdemo.p12 -validity 365 -ext SAN=IP:<machine ip where this project runs>,DNS:<machine hostname such as localhost>
 
 3) Now provide password for keystore twice.
