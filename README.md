@@ -1,7 +1,7 @@
 # SpringJWTDemo
 A simple Spring boot demo for JWT integration
 
-#Enable SSL verification in your Spring Boot Application
+***Enable SSL verification in your Spring Boot Application***
 # 1. CREATING KEYSTORE
 1) Create a self-signed certificate for demo purpose (Don't use this for production).
 2) Using java keytool, create a keystore which stores private keys and certificates.
@@ -18,25 +18,25 @@ A simple Spring boot demo for JWT integration
 
 # 2. Configuring SpringBoot project
 1) Add the following piece of code inside 'application.properties'
-{
+```
     server.port=8443
     server.ssl-enabled=true
     server.ssl.key-store=src/main/resources/jwtdemo.p12
     server.ssl.key-store-password=<the password you choose during step 3>
     server.ssl.keyStoreType=PKCS12
     server.ssl.keyAlias=jwtdemokey
-}
+```
 
 2) Add the following dependency in your 'pom.xml' file if not already present.
-{
+```
     <dependency>
         <groupId>org.apache.httpcomponents</groupId>
         <artifactId>httpclient</artifactId>
     </dependency>
-}
+```
 
 3) Add the following piece of code inside the 'SpringDemoApplication.java' file
-{
+```
     /* Since there are multiple choices for some classes, I have provided the exact ones */
     import org.apache.catalina.Context;
     import org.apache.catalina.connector.Connector;
@@ -74,7 +74,7 @@ A simple Spring boot demo for JWT integration
 		
 		return connector;
 	}
-}
+```
 
 # 3. Testing the App via POSTMAN
 1) Run/Debug your application as an java application.
